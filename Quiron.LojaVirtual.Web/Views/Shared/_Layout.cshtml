@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+@using Quiron.LojaVirtual.Web.Controllers;
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,6 +10,30 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
+    <ul class="nav nav-tabs">
+
+        @if (ViewContext.Controller.GetType() == typeof(VitrineController))
+        {
+            <li role="presentation" class="active">@Html.ActionLink("VitrineController", "ListarProdutos", "Vitrine", null, new { @class = "" })</li>
+            <li role="presentation">@Html.ActionLink("ProdutoController", "Index", "Produto", null, null)</li>
+            <li role="presentation">@Html.ActionLink("Teste3", "", "", null, null)</li>
+        }
+        else if (ViewContext.Controller.GetType() == typeof(ProdutoController))
+        {
+            <li role="presentation">@Html.ActionLink("VitrineController", "ListarProdutos", "Vitrine", null, new { @class = "" })</li>
+            <li role="presentation" class="active">@Html.ActionLink("ProdutoController", "Index", "Produto", null, null)</li>
+            <li role="presentation">@Html.ActionLink("Teste3", "", "", null, null)</li>
+        }
+        else if (ViewContext.Controller.GetType() == typeof(int))
+        {
+
+        }
+        else
+        {
+
+        }
+
+    </ul>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -17,10 +42,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Application name", "ListarProdutos", "Vitrine", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <
                 </ul>
             </div>
         </div>
