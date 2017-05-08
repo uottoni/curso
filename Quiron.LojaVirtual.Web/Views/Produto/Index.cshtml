@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Quiron.LojaVirtual.Dominio.Entidade.Produto>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style type="text/css">
+    a.btnEdit
+{
+    background: url("https://cdn3.iconfinder.com/data/icons/wpzoom-developer-icon-set/500/85-32.png") no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+     text-indent: -9999px; /* hides the link text */
+}
+       a.btnDetalhes
+{
+    background: url("https://cdn1.iconfinder.com/data/icons/general-9/500/more-32.png") no-repeat top left;
+     display: block;
+     width: 32px;
+     height: 32px;
+     text-indent: -9999px; /* hides the link text */
+}
+    
+</style>
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Preco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categoria)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProdutoId }, new {@class= "btnEdit" }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ProdutoId }, new { @class = "btnDetalhes" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProdutoId })
+        </td>
+    </tr>
+}
+
+</table>

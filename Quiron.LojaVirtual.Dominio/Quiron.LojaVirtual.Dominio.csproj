@@ -79,6 +79,8 @@
   <ItemGroup>
     <Compile Include="Entidade\Produto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorio\ProdutosRepositorio.cs" />
+    <Compile Include="Repositorio\QuironContext.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
