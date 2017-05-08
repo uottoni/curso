@@ -10,7 +10,7 @@
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
-    <ul class="nav nav-tabs">
+    @*<ul class="nav nav-tabs">
 
         @if (ViewContext.Controller.GetType() == typeof(VitrineController))
         {
@@ -32,8 +32,9 @@
         {
 
         }
+    </ul>*@
 
-    </ul>
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -46,14 +47,24 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <
+                    <li><a href="#">Teste1</a></li>
+                    <li><a href="#">Teste2</a></li>
+                    <li><a href="#">Teste3</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
     <div class="container body-content">
-        @RenderBody()
+        <div class="row panel">
+            <div class="col-xs-3">
+                Minhas Categorias
+            </div>
+            <div class="col-xs-9">
+                @RenderBody()
+            </div>
+        </div>
+     
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
