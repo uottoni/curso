@@ -12,20 +12,58 @@ namespace Quiron.LojaVirtual.Web.Controllers
     {
         private ProdutosRepositorio _repo;
         // GET: Vitrine
-        public ViewResult ListarProdutos(int pagina = 1)
+        public ViewResult ListarProdutos(string categoria,int pagina = 1)
         {
+            
             int itensPorPagina = 5;
             _repo = new ProdutosRepositorio();
-            ProdutosViewModel model = new ProdutosViewModel()
+            ProdutosViewModel model = new ProdutosViewModel();
+            //{
+            //    Produtos = (from x in _repo.Produtos select x)
+            //    .Where(x => x.Categoria == null || x.Categoria == categoria)
+            //    .OrderBy(x => x.Descricao)
+            //    .Skip((pagina - 1) * itensPorPagina)
+            //    .Take(itensPorPagina),
+            //    Paginacao = new Paginacao()
+            //    {
+            //        PaginaAtual = pagina,
+            //        ItensPorPagina = itensPorPagina,
+            //        ItensTotal = _repo.Produtos.Count(x => x.Categoria == null || x.Categoria == categoria)
+            //    },
+            //    UserIP = HttpContext.Request.UserHostAddress,
+            //    CategoriaAtual = categoria
+              
+            //};
+
+            if (string.IsNullOrEmpty(categoria))
             {
-                Produtos = (from x in _repo.Produtos select x).OrderBy(x => x.Descricao).Skip((pagina - 1) * itensPorPagina).Take(itensPorPagina),
-                Paginacao = new Paginacao()
+                var query = (from x in _repo.Produtos select x)
+                    .OrderBy(x => x.Descricao);
+
+                model.Produtos = query.Skip((pagina - 1) * itensPorPagina).Take(itensPorPagina);
+
+                model.Paginacao = new Paginacao()
                 {
                     PaginaAtual = pagina,
                     ItensPorPagina = itensPorPagina,
-                    ItensTotal = _repo.Produtos.Count()
-                }
-            };
+                    ItensTotal = query.Count()
+                };
+                    
+            }
+            else
+            {
+                var query = (from x in _repo.Produtos select x).Where(x=>x.Categoria.ToUpper().Contains(categoria.ToUpper()))
+                 .OrderBy(x => x.Descricao);
+
+                model.Produtos = query.Skip((pagina - 1) * itensPorPagina).Take(itensPorPagina);
+
+                model.Paginacao = new Paginacao()
+                {
+                    PaginaAtual = pagina,
+                    ItensPorPagina = itensPorPagina,
+                    ItensTotal = query.Count()
+                };
+            }
             //var ret = (from x in _repo.Produtos select x).Skip((pagina - 1) * itensPorPagina).Take(itensPorPagina);
             return View(model);
         }
