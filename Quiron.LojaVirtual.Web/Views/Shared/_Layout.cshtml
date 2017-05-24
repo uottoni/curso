@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-@using Quiron.LojaVirtual.Web.Controllers;
+@*@using Quiron.LojaVirtual.Web.Controllers;*@
 <html>
 <head>
     <meta charset="utf-8" />
@@ -58,7 +58,7 @@
     <div class="container body-content">
         <div class="row panel">
             <div class="col-xs-3">
-                Minhas Categorias
+               @Html.Action("Menu", "Categoria");
             </div>
             <div class="col-xs-9">
                 @RenderBody()
