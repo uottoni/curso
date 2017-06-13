@@ -1,0 +1,52 @@
+﻿@model Quiron.LojaVirtual.Web.Models.CarrinhoViewModel
+@{
+    ViewBag.Title = "Quiron> Seu carrinho";
+}
+
+<style>
+    #carrinho td {
+        vertical-align: middle;
+    }
+</style>
+
+<h2>Seu Carrinho</h2>
+
+<table id="carrinhoTable" class="table">
+    <thead>
+        <tr>
+            <th>Quantidade</th>
+            <th>Produto</th>
+            <th class="text-right">Preço</th>
+            <th class="text-right">Sub Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var i in Model.Carrinho.ItensCarrinho)
+        {
+            <tr class="text-center">
+                <td>@i.Quantidade</td>
+                <td>@i.Produto.Nome</td>
+                <td>@i.Produto.Preco.ToString("c")</td>
+                <td>@((i.Quantidade*i.Produto.Preco).ToString("c"))</td>
+                <td>
+                    @using(Html.BeginForm("Remover", "Carrinho"))
+                    {
+                        @Html.Hidden("ProdutoId", i.Produto.ProdutoId)
+                        @Html.HiddenFor(x=>x.ReturnUrl)
+                        <input type="submit" class="btn btn-warning" value="Remover" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total</td>
+            <td class="text-right">@Model.Carrinho.ObterValorTotal().ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+<div class="text-center">
+    <a class="btn btn-primary" href="@Model.ReturnUrl">Continuar comprando</a>
+    @Html.ActionLink("Fechar o pedido", "FecharPedido", "Carrinho", new { @class = "btn btn-primary" })
+</div>
